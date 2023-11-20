@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
+import http from 'http'
 import cache from 'memory-cache'
+import { Server } from 'socket.io'
 
 import { LibreLinkUpClient } from './libre-link-up-api-client/src'
 
@@ -29,6 +31,7 @@ const getDataFromCache = async () => {
 }
 
 const app = express();
+const server = http.createServer(app)
 const port = 4000;
 
 app.get('/data', async (req, res) => {
@@ -50,6 +53,17 @@ app.get('/current', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
+
+const io = new Server(server, { 
+  cors: {
+    origin: "http://localhost:3000"
+  }
+})
+
+setInterval(async () => {
+  const data = await getDataFromCache()
+  io.emit('data', data)
+}, 60000)
