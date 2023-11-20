@@ -64,6 +64,7 @@ const io = new Server(server, {
 })
 
 setInterval(async () => {
+  if (!io.engine.clientsCount) return
   const data = await getDataFromCache()
   io.emit('data', data)
 }, 60000)
