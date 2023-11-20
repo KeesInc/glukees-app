@@ -1,9 +1,6 @@
-import 'dotenv/config'
-import express from 'express';
-
 import { LibreLinkUpClient } from './libre-link-up-api-client/src'
 
-const run = async () => {
+export const getData = async () => {
     if (!process.env.LIBRE_LINK_UP_USERNAME || !process.env.LIBRE_LINK_UP_PASSWORD) {
         throw new Error('Invalid credentials')
     }
@@ -15,14 +12,3 @@ const run = async () => {
     
     return read()
 }
-
-const app = express();
-const port = 3000;
-
-app.get('/', async (req, res) => {
-  res.send(await run());
-});
-
-app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`);
-});
