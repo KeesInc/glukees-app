@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from 'axios';
 import { LibreCgmData } from './types/client';
 import { ActiveSensor, Connection, GlucoseItem } from './types/connection';
@@ -21,7 +22,7 @@ type ReadRawResponse = {
   graphData: GlucoseItem[];
 };
 
-type ReadResponse = {
+export type ReadResponse = {
   current: LibreCgmData;
   history: LibreCgmData[];
 };

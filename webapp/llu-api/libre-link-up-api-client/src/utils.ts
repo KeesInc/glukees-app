@@ -29,5 +29,5 @@ export const mapData = ({
   isHigh,
   isLow,
   trend: getTrend(TrendArrow),
-  date: toDate(`${FactoryTimestamp} UTC`),
+  date: toDate(`${FactoryTimestamp} UTC`).toISOString(),
 });

@@ -11,5 +11,5 @@ export type LibreCgmData = {
   isHigh: boolean;
   isLow: boolean;
   trend: TrendType;
-  date: Date;
+  date: string;
 };
