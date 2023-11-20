@@ -14,7 +14,7 @@ export const getServerSideProps = (async () => {
 
 export default function Page(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [data, setData] = useState(props.data)
-  
+
   useEffect(() => {
     function onData(data: any) {
       setData(data)
@@ -28,8 +28,8 @@ export default function Page(props: InferGetServerSidePropsType<typeof getServer
   }, []);
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between pt-24 px-20 pb-10">
-      <h1 className="text-7xl">{data.current.value || '-'}</h1> 
+    <main className="flex min-h-screen flex-col items-center justify-between pt-[100px] lg:px-20 pb-10">
+      <h1 className="text-[12rem] font-thin">{data.current.value || '-'}</h1> 
 
       <div className="relative flex-1 w-full h-full">
         <Line
