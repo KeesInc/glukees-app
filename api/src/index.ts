@@ -63,8 +63,20 @@ const io = new Server(server, {
   }
 })
 
-setInterval(async () => {
-  if (!io.engine.clientsCount) return
-  const data = await getDataFromCache()
-  io.emit('data', data)
-}, 60000)
+let interval: NodeJS.Timeout
+
+io.on('connection', () => {
+  if (!interval) {
+    interval = setInterval(async () => {
+      if (!io.engine.clientsCount) return
+      const data = await getDataFromCache()
+      io.emit('data', data)
+    }, 60000)
+  }
+})
+
+io.on('disconnect', () => {
+  if (!io.engine.clientsCount) {
+    clearInterval(interval)
+  }
+})
