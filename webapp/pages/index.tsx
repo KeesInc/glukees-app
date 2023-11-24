@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { socket } from "@/services/io"
 
 export const getServerSideProps = (async () => {
-  const response = await fetch('http://localhost:4000/data')
+  const response = await fetch('/api/data')
   const data = await response.json()
   return { props: { data } }
 }) satisfies GetServerSideProps<{
