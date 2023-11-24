@@ -5,7 +5,9 @@ import { useEffect, useState } from "react"
 import { socket } from "@/services/io"
 
 export const getServerSideProps = (async () => {
-  const response = await fetch('/api/data')
+  // const apiUrl = (process.env.API_URL || 'http://localhost:4000') + '/data'
+  const apiUrl = 'https://api.glukees.online/data'
+  const response = await fetch(apiUrl)
   const data = await response.json()
   return { props: { data } }
 }) satisfies GetServerSideProps<{
