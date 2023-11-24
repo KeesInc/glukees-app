@@ -6,16 +6,16 @@ function MyApp({ Component: C, pageProps }: AppProps) {
   const Component = C as any
 
   return <>
-    {process.env.GA_MEASUREMENT_ID && (
+    {'G-LEDPG4HV6Q' && (
       <>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`} />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${'G-LEDPG4HV6Q'}`} />
         <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '${process.env.GA_MEASUREMENT_ID}');
+            gtag('config', '${'G-LEDPG4HV6Q'}');
           `}
         </Script>
       </>
