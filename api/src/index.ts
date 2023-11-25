@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import http from 'http'
+import svg2png from 'svg2png'
 import cache from 'memory-cache'
 import { Server } from 'socket.io'
 
@@ -52,6 +53,27 @@ app.get('/current', async (req, res) => {
     res.json({ error })
   }
 });
+
+app.get('/current/image/:color', async (req, res) => {
+  try {
+    const data = await getDataFromCache()
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+      <text x="4" y="14" font-family="Arial" font-size="12" fill="${req.query.color}">${data.current.value.toFixed(1)}</text>
+    </svg>`;
+
+    // Convert SVG to PNG using svg2png
+    const pngBuffer = svg2png.sync(Buffer.from(svg));
+
+    // Set the response headers
+    res.set('Content-Type', 'image/png');
+
+    // Send the PNG image as a response
+    res.send(pngBuffer);
+  } catch (error) {
+    res.status(500)
+    res.json({ error })
+  }
+})
 
 server.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
