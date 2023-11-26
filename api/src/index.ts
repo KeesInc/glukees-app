@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import http from 'http'
-import svg2png from 'svg2png'
+import sharp from 'sharp'
 import cache from 'memory-cache'
 import { Server } from 'socket.io'
 
@@ -58,11 +58,11 @@ app.get('/current/image/:color', async (req, res) => {
   try {
     const data = await getDataFromCache()
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-      <text x="4" y="14" font-family="Arial" font-size="12" fill="${req.query.color}">${data.current.value.toFixed(1)}</text>
+      <text x="4" y="16" font-family="Arial" font-size="12" fill="${req.query.color}">${data.current.value.toFixed(1)}</text>
     </svg>`;
 
     // Convert SVG to PNG using svg2png
-    const pngBuffer = svg2png.sync(Buffer.from(svg));
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
 
     // Set the response headers
     res.set('Content-Type', 'image/png');
