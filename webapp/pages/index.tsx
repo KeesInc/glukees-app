@@ -30,8 +30,8 @@ export default function Page(props: InferGetServerSidePropsType<typeof getServer
   }, []);
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between pt-[100px] lg:px-20 pb-10">
-      <h1 className="text-[12rem] font-thin">{data.current.value || '-'}</h1> 
+    <main className="flex min-h-screen flex-col items-center justify-between pt-4 lg:px-20 lg:pt-[100px] lg:pb-10">
+      <h1 className="text-[4rem] font-thin lg:text-[12rem] mb-4">{data.current.value || '-'}</h1> 
 
       <div className="relative flex-1 w-full h-full">
         <Line
