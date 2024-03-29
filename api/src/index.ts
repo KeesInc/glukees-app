@@ -39,7 +39,7 @@ app.get('/data', async (req, res) => {
     res.json(await getDataFromCache());
   } catch (error) {
     res.status(500)
-    // res.json({ error })
+    res.json({})
   }
 });
 
@@ -49,7 +49,7 @@ app.get('/current', async (req, res) => {
     res.json({ value: data.current.value })
   } catch (error) {
     res.status(500)
-    // res.json({ error })
+    res.json({})
   }
 });
 
